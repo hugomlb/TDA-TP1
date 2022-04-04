@@ -1,0 +1,31 @@
+import argparse
+
+def parse_args():
+  usage = "[-h] [-k KILOMETERS] [-f FILE]"
+  description = """Program to cover k km with the minimum posible antenas of a set of n antenas.\n 
+The Antenas must be provided on a txt file with the next fromat:
+  antena_number,center,radius
+If the k km are covered, it prints de selected antena number's. 
+Otherwise it prints an empty list
+"""
+
+  parser = argparse.ArgumentParser("./main.py",
+    usage='%(prog)s {}\n\n{}'.format(usage, description))
+
+  group = parser.add_mutually_exclusive_group()
+  group.add_argument("-km", "--kilometers", default=500,
+    help="kilometers to be covered. Default value: 500")
+  group.add_argument("-f", "--file", default='contratos.txt',
+    help="file with antena's data. Default value: contratos.txt")
+
+  return parser.parse_args()
+
+def open_file(fileName, mode="r"):
+  try:
+    file = open("{}".format(fileName), mode)
+  except IOError:
+    print("I/O Error")
+    sys.exit(1)
+  except FileNotFoundError:
+    print("File not found Error", end='')
+  return file

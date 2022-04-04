@@ -1,15 +1,5 @@
 from operator import itemgetter
-
-def open_file(fileName, mode="r"):
-  try:
-    file = open("{}".format(fileName), mode)
-  except IOError:
-    print("I/O Error")
-    sys.exit(1)
-  except FileNotFoundError:
-    print("File not found Error", end='')
-  return file
-
+import utils
 
 
 def read_file(file):
@@ -60,7 +50,7 @@ def resolve_problem(lista_antenas, km):
     min_ic = km
     seleccionado = None
     for candidato in candidatos: 
-      if(candidato[1][1] <= min_ic):
+      if(candidato[1][1] <= min_ic): #agregar desempate
         min_ic = candidato[1][1]
         seleccionado = candidato[1][0]
     km = min_ic
@@ -72,9 +62,10 @@ def resolve_problem(lista_antenas, km):
 
     
 def run():
-  file = open_file('contratos.txt')
+  args = utils.parse_args()
+  file = utils.open_file(args.file)
   lista_antenas = read_file(file)
-  print(resolve_problem(lista_antenas, 5000))
+  print(resolve_problem(lista_antenas, int(args.kilometers)))
 
 
 
