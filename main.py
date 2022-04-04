@@ -44,14 +44,12 @@ def resolve_problem(antenna_list, km):
 
     if len(candidates) == 0:
       antenna_list =[]
-
     min_ic = km
     selected = None
     for candidate in candidates: 
-      if(candidate[1][1] <= min_ic): #agregar desempate
+      if(candidate[1][1] < min_ic):
         min_ic = candidate[1][1]
         selected = candidate[1][0]
-
     km = min_ic
     selected_antennas.append(selected)
 
@@ -64,8 +62,7 @@ def run():
   args = utils.parse_args()
   file = utils.open_file(args.file)
   antenna_list = read_file(file)
-  print(antenna_list)
-  print('---------------')
+  print('The Answer is:')
   print(resolve_problem(antenna_list, int(args.kilometers)))
 
 
