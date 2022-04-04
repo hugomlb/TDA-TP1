@@ -55,7 +55,8 @@ def resolve_problem(lista_antenas, km):
     while lista_antenas[actual][0] >= km:
       candidatos.append(lista_antenas[actual])
       actual += 1
-
+    if len(candidatos) == 0:
+      lista_antenas =[]
     min_ic = km
     seleccionado = None
     for candidato in candidatos: 
@@ -64,13 +65,16 @@ def resolve_problem(lista_antenas, km):
         seleccionado = candidato[1][0]
     km = min_ic
     seleccionados.append(seleccionado)
+
+  if km > 0:
+    seleccionados = [] 
   return seleccionados
 
     
 def run():
   file = open_file('contratos.txt')
   lista_antenas = read_file(file)
-  print(resolve_problem(lista_antenas, 500))
+  print(resolve_problem(lista_antenas, 5000))
 
 
 
