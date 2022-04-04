@@ -2,8 +2,8 @@ import argparse
 
 def parse_args():
   usage = "[-h] [-k KILOMETERS] [-f FILE]"
-  description = """Program to cover k km with the minimum posible antenas of a set of n antenas.\n 
-The Antenas must be provided on a txt file with the next fromat:
+  description = """Program to cover k km with the minimum posible antennas of a set of n antennas.
+The antennas must be provided on a txt file with the next fromat:
   antena_number,center,radius
 If the k km are covered, it prints de selected antena number's. 
 Otherwise it prints an empty list

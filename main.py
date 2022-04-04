@@ -4,7 +4,7 @@ import utils
 
 def read_file(file):
 
-  lista_antenas = []
+  antenna_list = []
 
   while True:
     line = file.readline()
@@ -12,13 +12,10 @@ def read_file(file):
       print()
       break
     else:
-      elemento = parse_line(line.strip('\n'))
-      lista_antenas.append(elemento)
-  lista_antenas.sort(key=itemgetter(0), reverse=True)
-  print('lista de antenas')
-  print(lista_antenas)
-  print('---------------')
-  return lista_antenas
+      antenna = parse_line(line.strip('\n'))
+      antenna_list.append(antenna)
+  antenna_list.sort(key=itemgetter(0), reverse=True)
+  return antenna_list
 
 
 def parse_line(line):
@@ -33,39 +30,41 @@ def parse_line(line):
 
 
 
-def resolve_problem(lista_antenas, km):
-  lista_antenas.append((-1, [-1, -1]))
+def resolve_problem(antenna_list, km):
+  antenna_list.append((-1, [-1, -1]))
   actual = 0
-  seleccionados = []
+  selected_antennas = []
 
-  while km != 0 and actual != len(lista_antenas):
+  while km != 0 and actual != len(antenna_list):
 
-    candidatos = []
+    candidates = []
 
-    while lista_antenas[actual][0] >= km:
-      candidatos.append(lista_antenas[actual])
+    while antenna_list[actual][0] >= km:
+      candidates.append(antenna_list[actual])
       actual += 1
-    if len(candidatos) == 0:
-      lista_antenas =[]
+    if len(candidates) == 0:
+      antenna_list =[]
     min_ic = km
-    seleccionado = None
-    for candidato in candidatos: 
-      if(candidato[1][1] <= min_ic): #agregar desempate
-        min_ic = candidato[1][1]
-        seleccionado = candidato[1][0]
+    selected = None
+    for candidate in candidates: 
+      if(candidate[1][1] <= min_ic): #agregar desempate
+        min_ic = candidate[1][1]
+        selected = candidate[1][0]
     km = min_ic
-    seleccionados.append(seleccionado)
+    selected_antennas.append(selected)
 
   if km > 0:
-    seleccionados = [] 
-  return seleccionados
+    selected_antennas = [] 
+  return selected_antennas
 
     
 def run():
   args = utils.parse_args()
   file = utils.open_file(args.file)
-  lista_antenas = read_file(file)
-  print(resolve_problem(lista_antenas, int(args.kilometers)))
+  antenna_list = read_file(file)
+  print(antenna_list)
+  print('---------------')
+  print(resolve_problem(antenna_list, int(args.kilometers)))
 
 
 
