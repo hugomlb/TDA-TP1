@@ -29,7 +29,6 @@ def parse_line(line):
   return (fc, [antena_id, ic])
 
 
-
 def resolve_problem(antenna_list, km):
   antenna_list.append((-1, [-1, -1]))
   actual = 0
@@ -42,14 +41,17 @@ def resolve_problem(antenna_list, km):
     while antenna_list[actual][0] >= km:
       candidates.append(antenna_list[actual])
       actual += 1
+
     if len(candidates) == 0:
       antenna_list =[]
+
     min_ic = km
     selected = None
     for candidate in candidates: 
       if(candidate[1][1] <= min_ic): #agregar desempate
         min_ic = candidate[1][1]
         selected = candidate[1][0]
+
     km = min_ic
     selected_antennas.append(selected)
 
@@ -65,7 +67,6 @@ def run():
   print(antenna_list)
   print('---------------')
   print(resolve_problem(antenna_list, int(args.kilometers)))
-
 
 
 if __name__ == "__main__":
