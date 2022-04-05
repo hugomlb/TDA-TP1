@@ -64,6 +64,7 @@ def run():
   antenna_list = read_file(file)
   print('The Answer is:')
   print(resolve_problem(antenna_list, int(args.kilometers)))
+  file.close()
 
 
 if __name__ == "__main__":
