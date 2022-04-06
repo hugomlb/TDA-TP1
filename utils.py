@@ -29,6 +29,4 @@ def open_file(fileName, mode="r"):
   except IOError:
     print("I/O Error")
     sys.exit(1)
-  except FileNotFoundError:
-    print("File not found Error", end='')
   return file

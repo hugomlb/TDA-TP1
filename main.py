@@ -65,7 +65,6 @@ def resolve_problem(antenna_list, km):
 def run():
   args = utils.parse_args()
   kilometers = int(args.kilometers)
-  print(kilometers)
   if (kilometers > 0):
 
     file = utils.open_file(args.file)
