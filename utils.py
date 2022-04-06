@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 def parse_args():
   usage = "[-h] [-k KILOMETERS] [-f FILE]"
@@ -10,12 +11,14 @@ Otherwise it prints an empty list
 """
 
   parser = argparse.ArgumentParser("./main.py",
-    usage='%(prog)s {}\n\n{}'.format(usage, description))
+    usage='%(prog)s {}\n{}'.format(usage, description))
 
   group = parser.add_mutually_exclusive_group()
   group.add_argument("-km", "--kilometers", default=500,
+    type=int, const=500, nargs='?',
     help="kilometers to be covered. Default value: 500")
   group.add_argument("-f", "--file", default='contratos.txt',
+    type=str, const='contratos.txt', nargs='?',
     help="file with antena's data. Default value: contratos.txt")
 
   return parser.parse_args()

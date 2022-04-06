@@ -5,8 +5,8 @@ import utils
 def read_file(file):
 
   antenna_list = []
-
-  while True:
+  line = ' '
+  while line != '':
     line = file.readline()
     if not line:
       print()
@@ -38,12 +38,16 @@ def resolve_problem(antenna_list, km):
 
     candidates = []
 
-    while antenna_list[actual][0] >= km:
-      candidates.append(antenna_list[actual])
-      actual += 1
+    try: 
+      while antenna_list[actual][0] >= km:
+        candidates.append(antenna_list[actual])
+        actual += 1
+    except IndexError:
+      actual = len(antenna_list)
 
     if len(candidates) == 0:
       antenna_list =[]
+
     min_ic = km
     selected = None
     for candidate in candidates: 
@@ -60,12 +64,17 @@ def resolve_problem(antenna_list, km):
     
 def run():
   args = utils.parse_args()
-  file = utils.open_file(args.file)
-  antenna_list = read_file(file)
-  print('The Answer is:')
-  print(resolve_problem(antenna_list, int(args.kilometers)))
-  file.close()
+  kilometers = int(args.kilometers)
+  print(kilometers)
+  if (kilometers > 0):
 
+    file = utils.open_file(args.file)
+    antenna_list = read_file(file)
+    print('The Answer is:')
+    print(resolve_problem(antenna_list, int(args.kilometers)))
+    file.close()
+  else: 
+    print('Kilometers must be greater than 0')
 
 if __name__ == "__main__":
     run()
