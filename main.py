@@ -30,7 +30,6 @@ def parse_line(line):
 
 
 def resolve_problem(antenna_list, km):
-  antenna_list.append((-1, [-1, -1]))
   actual = 0
   selected_antennas = []
 
@@ -58,7 +57,7 @@ def resolve_problem(antenna_list, km):
     selected_antennas.append(selected)
 
   if km > 0:
-    selected_antennas = [] 
+    selected_antennas = 'THERE IS NO SOLUTION'
   return selected_antennas
 
     
